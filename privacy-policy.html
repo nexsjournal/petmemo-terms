@@ -49,17 +49,18 @@
     a:hover { text-decoration: underline; }
     hr { border: none; border-top: 1px solid #eceef2; margin: 24px 0; }
     em { color: #5b6370; }
+    code { font-size: 0.92em; }
   </style>
 </head>
 <body>
   <main>
     <h1>PetMemo 隐私政策</h1>
-    <p class="meta"><strong>生效日期：2026 年 6 月 12 日</strong><br><strong>最后更新：2026 年 6 月 12 日</strong></p>
+    <p class="meta"><strong>生效日期：2026 年 6 月 12 日</strong><br><strong>最后更新：2026 年 6 月 14 日</strong></p>
 
     <h2>引言</h2>
     <p>欢迎使用 PetMemo（以下简称「本应用」或「我们」）。</p>
     <p>我们重视并保护用户个人信息与隐私安全。本隐私政策用于说明您在下载、安装、访问或使用 PetMemo 过程中，我们如何收集、使用、存储、共享和保护您的信息，以及您享有的相关权利。请您在使用本应用前仔细阅读并充分理解本政策。您开始使用本应用，即视为您已阅读并同意本政策。</p>
-    <p>PetMemo 是一款面向宠物主人的本地记录工具，帮助您记录宠物档案、成长瞬间、散步轨迹与足迹，并生成可分享的回忆卡片。我们遵循 <strong>Local-first（本地优先）</strong> 原则：您的宠物隐私数据默认保存在您的设备本地，我们不会将其上传至开发者自建业务服务器进行持久化存储。</p>
+    <p>PetMemo 是一款面向宠物主人的本地记录工具，帮助您记录宠物档案、成长瞬间、散步轨迹与足迹，并生成可分享的回忆卡片。我们遵循 <strong>Local-first（本地优先）</strong> 原则：您的宠物隐私数据默认保存在您的设备本地；当您登录 iCloud 后，结构化数据与照片会通过 <strong>Apple CloudKit 私有库</strong> 在您的 Apple 设备间同步。我们不会将宠物档案持久化存储在开发者自建业务服务器上。</p>
 
     <hr>
 
@@ -76,10 +77,11 @@
     </ul>
 
     <h3>1.2 相册媒体信息</h3>
-    <p>当您使用 PhotosPicker 选择宠物头像或成长记录照片时，本应用会读取您选中的照片内容，并将其<strong>复制保存至本应用沙盒目录</strong>（<code>Documents/Media</code>），用于在应用内展示。</p>
+    <p>当您使用 PhotosPicker 选择宠物头像或成长记录照片时，本应用会读取您选中的照片内容，在保存前进行<strong>尺寸压缩与质量优化</strong>（例如头像最长边约 512 像素、成长记录照片最长边约 1920 像素），并将压缩后的文件<strong>复制保存至本应用沙盒目录</strong>（<code>Documents/Media</code>），同时写入 SwiftData 以供 iCloud 同步。</p>
     <ul>
       <li>我们仅处理您<strong>主动选择</strong>的照片，不会在后台扫描整个相册。</li>
-      <li>当前版本<strong>不会</strong>将照片上传至开发者自建服务器。</li>
+      <li>照片同步通过 <strong>Apple CloudKit 私有库</strong> 完成，存储在您的 iCloud 账户下，<strong>不会</strong>上传至开发者自建服务器。</li>
+      <li>压缩旨在减少设备与 iCloud 占用，原始未压缩相册文件不会被完整复制。</li>
     </ul>
 
     <h3>1.3 位置信息</h3>
@@ -127,9 +129,9 @@
     <h3>1.6 我们不主动收集的信息</h3>
     <p>在当前版本中：</p>
     <ul>
-      <li><strong>不提供</strong>账号注册、登录体系，不主动收集手机号、密码</li>
+      <li><strong>不提供</strong>独立的账号注册、密码登录体系；多设备同步依赖您设备上的 <strong>iCloud 账户</strong></li>
       <li><strong>不接入</strong> HealthKit，不提供医疗诊断</li>
-      <li><strong>不上传</strong>宠物照片、完整轨迹、成长记录正文至开发者自建数据库</li>
+      <li><strong>不上传</strong>宠物档案、照片、完整轨迹至开发者自建数据库</li>
       <li><strong>不收集</strong>通讯录、日历、麦克风、相机（拍照）等与核心功能无关的信息</li>
     </ul>
     <p>您在设置中自愿填写的邮箱仅保存在本地，用于您的个人备忘，我们不会将其用于营销或共享给第三方。</p>
@@ -175,7 +177,8 @@
     <h3>4.1 Apple 系统服务</h3>
     <p>本应用在以下场景可能发生网络访问：</p>
     <ul>
-      <li><strong>应用内购买与订阅</strong>：通过 Apple StoreKit 与 App Store 进行商品查询、购买、恢复购买及交易校验（月会员、年会员、终身会员）。</li>
+      <li><strong>iCloud / CloudKit 同步</strong>：当您登录 iCloud 时，宠物档案、成长记录、散步轨迹、足迹地点及照片会通过 Apple CloudKit 私有库在您的设备间同步。数据存储在您的 iCloud 账户下，受 Apple 隐私政策约束。</li>
+      <li><strong>应用内购买与订阅</strong>：通过 Apple StoreKit 与 App Store 进行商品查询、购买、恢复购买及交易校验。</li>
       <li><strong>地图与地理编码</strong>：通过 Apple MapKit / CoreLocation 地理编码服务，将坐标转换为地点名称。</li>
       <li><strong>iCloud 照片（系统能力）</strong>：若您从 iCloud 相册选取照片，系统可能在您操作时下载相应资源。</li>
     </ul>
@@ -193,9 +196,9 @@
     <h3>4.5 关于自建服务器与数据上传</h3>
     <p>依据当前版本实现：</p>
     <ul>
-      <li>宠物档案、成长记录、散步轨迹、照片等媒体<strong>默认仅保存在您的设备本地</strong>。</li>
-      <li>服务端（如已部署的 AI 文案网关）<strong>不持久化</strong>您的宠物隐私档案；仅处理生成文案所需的最小字段。</li>
-      <li>我们<strong>未发现</strong>将相册媒体或完整本地数据库上传至开发者自建业务服务器的功能通道。</li>
+      <li>宠物档案、成长记录、散步轨迹、照片等媒体<strong>保存在您的设备本地</strong>；登录 iCloud 后通过 <strong>CloudKit 私有库</strong> 同步，<strong>不经过开发者自建业务服务器</strong>。</li>
+      <li>服务端（AI 文案网关）<strong>不持久化</strong>您的宠物隐私档案；仅处理生成文案所需的最小字段。</li>
+      <li>我们<strong>不会</strong>将相册媒体或完整本地数据库上传至开发者自建的文件或数据库服务器。</li>
     </ul>
 
     <hr>
@@ -203,18 +206,20 @@
     <h2>5. 信息存储与保存期限</h2>
 
     <h3>5.1 存储位置</h3>
-    <p>您的数据主要保存在本地设备，包括但不限于：</p>
+    <p>您的数据主要保存在以下位置：</p>
     <ul>
       <li><strong>SwiftData</strong>：宠物档案、成长记录、散步会话、足迹地点等结构化数据</li>
-      <li><strong>应用沙盒</strong>（<code>Documents/Media</code>）：宠物头像、成长记录照片</li>
+      <li><strong>应用沙盒</strong>（<code>Documents/Media</code>）：压缩后的宠物头像、成长记录照片（本地缓存）</li>
+      <li><strong>iCloud（CloudKit 私有库）</strong>：当您登录 iCloud 时，上述结构化数据与照片副本会同步至您的 iCloud 账户，占用您的 iCloud 存储空间</li>
+      <li><strong>应用缓存</strong>（<code>Caches/Thumbnails</code>）：列表展示用缩略图，可随系统清理</li>
       <li><strong>UserDefaults</strong>：应用偏好设置、可选昵称/邮箱</li>
       <li><strong>临时目录</strong>：回忆卡片渲染图片、数据导出 JSON 临时文件</li>
     </ul>
 
     <h3>5.2 保存期限</h3>
     <ul>
-      <li>本地数据在实现对应功能所需期限内保存，直至您主动删除记录、删除宠物档案或卸载应用。</li>
-      <li>卸载应用后，应用沙盒内数据通常会被 iOS 系统移除。</li>
+      <li>本地与 iCloud 数据在实现对应功能所需期限内保存，直至您主动删除记录、删除宠物档案、关闭 iCloud 同步或卸载应用。</li>
+      <li>卸载应用后，应用沙盒内本地数据通常会被 iOS 系统移除；已同步至 iCloud 的数据仍保留在您的 iCloud 账户中，直至您在 iCloud 管理页或重新安装后删除。</li>
       <li>您可通过应用内「导出数据」功能将 JSON 备份至您选择的位置；也可通过系统分享保存回忆卡片。</li>
     </ul>
 
@@ -231,7 +236,7 @@
     <h3>6.2 必要共享情形</h3>
     <p>在以下必要场景，可能发生信息共享或披露：</p>
     <ul>
-      <li>与 <strong>Apple</strong> 提供的系统服务交互（StoreKit、MapKit、CoreLocation、PhotosUI 等）</li>
+      <li>与 <strong>Apple</strong> 提供的系统服务交互（CloudKit、StoreKit、MapKit、CoreLocation、PhotosUI 等）</li>
       <li>与<strong>文案生成服务</strong>交互时，传输第 1.4 节所述有限字段（不含照片与完整轨迹）</li>
       <li>您<strong>主动触发</strong>分享至第三方应用</li>
       <li>法律法规或有权机关依法要求</li>
@@ -244,7 +249,8 @@
     <ul>
       <li>遵循 iOS 沙盒与系统安全机制</li>
       <li>最小必要权限原则</li>
-      <li>本地数据存储，默认不上云</li>
+      <li>本地优先存储；iCloud 同步使用 Apple CloudKit 私有库，不经开发者服务器</li>
+      <li>照片保存前压缩，减少设备与 iCloud 占用</li>
       <li>持续修复已知安全与稳定性问题</li>
     </ul>
     <p>请您理解，任何技术措施都无法保证绝对安全。您应妥善保管设备并启用系统安全功能（如锁屏密码、Face ID / Touch ID）。</p>
@@ -258,6 +264,7 @@
       <li><strong>删除</strong>：删除指定记录、宠物档案，或卸载应用</li>
       <li><strong>导出</strong>：通过「设置 → 导出数据」获取 JSON 格式备份</li>
       <li><strong>撤回权限</strong>：在 iOS「设置 → 隐私与安全性」中关闭定位、相册、通知等权限</li>
+      <li><strong>管理 iCloud 同步</strong>：在 iOS「设置 → Apple ID → iCloud」中管理 iCloud 登录与存储</li>
       <li><strong>恢复购买</strong>：在 Pro 订阅页面使用「恢复购买」功能</li>
     </ul>
     <p>如您希望行使其他隐私权利（如投诉、建议），可通过本政策「联系我们」方式反馈。</p>
@@ -285,7 +292,7 @@
     <h2>12. 其他重要信息</h2>
 
     <h3>12.1 数据最小化原则</h3>
-    <p>我们遵循「数据最小化」原则，只收集和处理提供服务所必需的最少信息。宠物隐私数据以本地存储为默认策略。</p>
+    <p>我们遵循「数据最小化」原则，只收集和处理提供服务所必需的最少信息。宠物隐私数据以本地存储为默认策略，并在您启用 iCloud 后通过 Apple CloudKit 私有库同步。</p>
 
     <h3>12.2 健康信息声明</h3>
     <p>本应用中的体重、疫苗、健康类记录仅供您个人备忘，<strong>不构成</strong>兽医诊断、治疗或医疗建议。如有健康问题，请咨询专业兽医。</p>
